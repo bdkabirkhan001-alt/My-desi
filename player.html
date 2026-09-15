@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Player - Mydesi.net</title>
+  <meta name="description" content="Watch free Indian desi porn videos on Mydesi.net">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="age-notice">⚠️ 18+ Only | Adult Content | By entering you confirm you are 18 years or older</div>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">My<span>desi</span>.net</a>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html" onclick="localStorage.setItem('filter','popular')">Popular</a>
+        <a href="index.html" onclick="localStorage.setItem('filter','new')">New</a>
+        <a href="index.html#categories">Categories</a>
+        <a href="index.html#tags">Tags</a>
+      </nav>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search videos..." onkeypress="if(event.key==='Enter') location.href='index.html'">
+        <button onclick="location.href='index.html'">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="player-container">
+      <div id="player-main">
+        <div class="loading">Loading video...</div>
+      </div>
+      <div class="suggestions">
+        <h3>Suggested Videos</h3>
+        <div id="suggestions-list"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a onclick="openModal('us-modal')">US Statement</a>
+        <a onclick="openModal('dmca-modal')">DMCA</a>
+        <a href="index.html">Home</a>
+      </div>
+
+      <div class="partners">
+        <h4>Partner Sites</h4>
+        <div class="partner-links">
+          <a href="https://www.pornhub.com" target="_blank" rel="nofollow">Pornhub</a>
+          <a href="https://www.xvideos.com" target="_blank" rel="nofollow">XVideos</a>
+          <a href="https://www.xnxx.com" target="_blank" rel="nofollow">XNXX</a>
+          <a href="https://www.spankbang.com" target="_blank" rel="nofollow">SpankBang</a>
+          <a href="https://www.xhamster.com" target="_blank" rel="nofollow">xHamster</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Mydesi.net – Free Indian Porn Videos. All rights reserved.<br>
+        This site contains adult material. All models are 18+.
+      </div>
+    </div>
+  </footer>
+
+  <!-- US Statement Modal -->
+  <div class="modal" id="us-modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('us-modal')">&times;</span>
+      <h2>US Statement / 18 U.S.C. 2257</h2>
+      <p>All models, actors, actresses and other persons that appear in any visual depiction of actual or simulated sexually explicit conduct appearing or otherwise contained in or at this website were over the age of eighteen (18) years at the time of the creation of such depictions.</p>
+      <p>Some of the aforementioned depictions appearing or otherwise contained in or at this site contain only visual depictions of actual sexually explicit conduct made before July 3, 1995, and, as such, are exempt from the requirements set forth in 18 U.S.C. 2257 and C.F.R. 75.</p>
+      <p>With respect to all remaining visual depictions displayed on this website, whether of actual sexually explicit conduct, simulated sexual content or otherwise, all persons in said visual depictions were at least 18 years of age when said visual depictions were created.</p>
+      <p>The owners and operators of this website are not the primary producers (as that term is defined in 18 U.S.C. Section 2257) of any of the visual content contained in the website.</p>
+      <p>Records required pursuant to 18 U.S.C. 2257 are kept by the Custodian of Records at the following location: [Custodian Address Placeholder].</p>
+    </div>
+  </div>
+
+  <!-- DMCA Modal -->
+  <div class="modal" id="dmca-modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('dmca-modal')">&times;</span>
+      <h2>DMCA Notice & Takedown Policy</h2>
+      <p>Mydesi.net respects the intellectual property rights of others and expects its users to do the same. In accordance with the Digital Millennium Copyright Act of 1998 ("DMCA"), we will respond promptly to claims of copyright infringement that are reported to our designated copyright agent.</p>
+      <p>If you are a copyright owner, or authorized to act on behalf of one, please report alleged copyright infringements taking place on or through the Site by completing the following DMCA Notice of Alleged Infringement and delivering it to our Designated Copyright Agent.</p>
+      <p><strong>To file a notice:</strong></p>
+      <p>1. Identify the copyrighted work that you claim has been infringed.<br>
+      2. Identify the material that you claim is infringing and provide a URL or other specific location.<br>
+      3. Provide your contact information (name, address, telephone, email).<br>
+      4. Include a statement that you have a good faith belief that the use is not authorized.<br>
+      5. Include a statement under penalty of perjury that the information is accurate and that you are the owner or authorized to act on behalf of the owner.<br>
+      6. Sign the notice (physical or electronic signature).</p>
+      <p>Send the notice to: dmca@mydesi.net (placeholder email)</p>
+      <p>Upon receipt of a valid DMCA notice, we will remove or disable access to the allegedly infringing material and take reasonable steps to notify the user.</p>
+      <p>Counter-notification procedures are available as provided by the DMCA.</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+  </script>
+  <script src="js/player.js"></script>
+</body>
+</html>
