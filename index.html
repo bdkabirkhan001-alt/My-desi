@@ -5,16 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mydesi.net – Free indian Porn Videos</title>
   <meta name="description" content="Watch free Indian desi porn videos. Hot bhabhi, college girls, aunty and more. Full HD desi sex videos updated daily.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mydesi.casa/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mydesi.net">
+  <meta property="og:title" content="Mydesi.net – Free indian Porn Videos">
+  <meta property="og:description" content="Watch free Indian desi porn videos. Hot bhabhi, college girls, aunty and more. Full HD desi sex videos updated daily.">
+  <meta property="og:url" content="https://mydesi.casa/">
+  <meta property="og:image" content="https://mydesi.casa/og-image.jpg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mydesi.net – Free indian Porn Videos">
+  <meta name="twitter:description" content="Watch free Indian desi porn videos. Hot bhabhi, college girls, aunty and more.">
+
+  <!-- Schema.org -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Mydesi.net",
-  "alternateName": "Mydesi.net",
-  "url": "https://mydesi.casa"
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MyDesi.net",
+    "alternateName": "mydesi.net",
+    "url": "https://mydesi.casa"
+  }
   </script>
-  
+
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -24,7 +42,8 @@
   <header>
     <div class="header-container">
       <a href="index.html" class="logo">My<span>desi</span>.net</a>
-      <nav class="nav-menu">
+      <button class="menu-toggle" id="menu-toggle" aria-label="Menu">☰</button>
+      <nav class="nav-menu" id="nav-menu">
         <a href="index.html" class="active">Home</a>
         <a href="#" onclick="setFilter('popular'); return false;">Popular</a>
         <a href="#" onclick="setFilter('new'); return false;">New</a>
@@ -67,13 +86,15 @@
         <a onclick="openModal('us-modal')">US Statement</a>
         <a onclick="openModal('dmca-modal')">DMCA</a>
         <a href="index.html">Home</a>
+        <a href="json-generator.html">JSON Generator</a>
       </div>
 
       <div class="partners">
         <h4>Partner Sites</h4>
         <div class="partner-links">
           <a href="https://www.indiankamasutra.com" target="_blank" rel="nofollow">Indian Kamasutra</a>
-          <a href="https://www.kamababa.vip" target="_blank" rel="nofollow">KamaBaba VIP</a>
+          <a href="https://www.kamababa.vip" target="_blank" rel="nofollow">KamaBaba Vip</a>
+          
         </div>
       </div>
 
@@ -118,5 +139,11 @@
   </div>
 
   <script src="js/main.js"></script>
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('nav-menu').classList.toggle('open');
+    });
+  </script>
 </body>
 </html>
