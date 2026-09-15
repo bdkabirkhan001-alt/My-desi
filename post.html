@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video JSON Generator - Mydesi.net</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+      color: #ff0000;
+    }
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      background: #181818;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+    label {
+      font-size: 13px;
+      color: #ccc;
+      font-weight: 500;
+    }
+    input, textarea, select {
+      padding: 10px 12px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #121212;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #ff0000;
+    }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .tags-hint {
+      font-size: 12px;
+      color: #888;
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button:active { transform: scale(0.98); }
+    .btn-generate {
+      background: #ff0000;
+      color: #fff;
+    }
+    .btn-generate:hover { background: #cc0000; }
+    .btn-copy {
+      background: #333;
+      color: #fff;
+    }
+    .btn-copy:hover { background: #444; }
+    .btn-copy.copied {
+      background: #0a7a0a;
+    }
+    .btn-clear {
+      background: #444;
+      color: #ddd;
+    }
+    .btn-clear:hover { background: #555; }
+    .btn-download {
+      background: #1a5fb4;
+      color: #fff;
+    }
+    .btn-download:hover { background: #155a9e; }
+    .output-section {
+      background: #181818;
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+    }
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .output-header h2 {
+      font-size: 16px;
+      color: #ccc;
+    }
+    #json-output {
+      background: #0d0d0d;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #0f0;
+      white-space: pre-wrap;
+      word-break: break-all;
+      min-height: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .filename-preview {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #888;
+    }
+    .filename-preview strong {
+      color: #ff6666;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back-link:hover { color: #ff0000; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Mydesi.net</a>
+    <h1>Video JSON Generator</h1>
+    <p class="subtitle">Data দাও → JSON তৈরি হবে → Copy করে <code>json/</code> folder এ save করো</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Video ID *</label>
+        <input type="text" id="id" placeholder="video9" value="">
+      </div>
+      <div class="form-group">
+        <label>Category *</label>
+        <input type="text" id="category" placeholder="Bhabhi / College / Aunty..." value="">
+      </div>
+      <div class="form-group full">
+        <label>Title *</label>
+        <input type="text" id="title" placeholder="Hot Indian Bhabhi Romance with Devar" value="">
+      </div>
+      <div class="form-group full">
+        <label>Description *</label>
+        <textarea id="description" placeholder="Beautiful Indian bhabhi in steamy scene..."></textarea>
+      </div>
+      <div class="form-group full">
+        <label>Thumbnail URL *</label>
+        <input type="url" id="thumbnail" placeholder="https://example.com/thumb.jpg" value="">
+      </div>
+      <div class="form-group full">
+        <label>Video URL (MP4) *</label>
+        <input type="url" id="video_url" placeholder="https://example.com/video.mp4" value="">
+      </div>
+      <div class="form-group full">
+        <label>Tags * <span class="tags-hint">(comma দিয়ে আলাদা করো)</span></label>
+        <input type="text" id="tags" placeholder="bhabhi, devar, indian, romance, desi" value="">
+      </div>
+      <div class="form-group">
+        <label>Views</label>
+        <input type="number" id="views" placeholder="125430" value="0" min="0">
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="date" value="">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-generate" onclick="generateJSON()">Generate JSON</button>
+      <button class="btn-copy" id="copy-btn" onclick="copyJSON()">Copy JSON</button>
+      <button class="btn-download" onclick="downloadJSON()">Download .json File</button>
+      <button class="btn-clear" onclick="clearForm()">Clear</button>
+    </div>
+
+    <div class="output-section">
+      <div class="output-header">
+        <h2>Generated JSON</h2>
+      </div>
+      <pre id="json-output">// Form fill করে "Generate JSON" চাপো</pre>
+      <div class="filename-preview">
+        File name: <strong id="filename">videoX.json</strong> &nbsp;→&nbsp; <code>json/</code> folder এ রাখো + <code>manifest.json</code> এ id add করো
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Set today's date by default
+    document.getElementById('date').valueAsDate = new Date();
+
+    function generateJSON() {
+      const id = document.getElementById('id').value.trim();
+      const title = document.getElementById('title').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const thumbnail = document.getElementById('thumbnail').value.trim();
+      const video_url = document.getElementById('video_url').value.trim();
+      const tagsRaw = document.getElementById('tags').value.trim();
+      const category = document.getElementById('category').value.trim();
+      const views = parseInt(document.getElementById('views').value) || 0;
+      const date = document.getElementById('date').value || new Date().toISOString().slice(0, 10);
+
+      if (!id || !title || !description || !thumbnail || !video_url || !tagsRaw || !category) {
+        alert('সব required field (*) পূরণ করো!');
+        return;
+      }
+
+      // Clean tags
+      const tags = tagsRaw.split(',')
+        .map(t => t.trim())
+        .filter(t => t.length > 0);
+
+      const obj = {
+        id: id,
+        title: title,
+        description: description,
+        thumbnail: thumbnail,
+        video_url: video_url,
+        tags: tags,
+        category: category,
+        views: views,
+        date: date
+      };
+
+      const jsonStr = JSON.stringify(obj, null, 2);
+      document.getElementById('json-output').textContent = jsonStr;
+      document.getElementById('filename').textContent = id + '.json';
+
+      // Reset copy button
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copy JSON';
+      btn.classList.remove('copied');
+    }
+
+    function copyJSON() {
+      const text = document.getElementById('json-output').textContent;
+      if (text.startsWith('//')) {
+        alert('আগে Generate JSON করো!');
+        return;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy JSON';
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(() => {
+        // Fallback
+        const range = document.createRange();
+        range.selectNode(document.getElementById('json-output'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Copied!');
+      });
+    }
+
+    function downloadJSON() {
+      const text = document.getElementById('json-output').textContent;
+      if (text.startsWith('//')) {
+        alert('আগে Generate JSON করো!');
+        return;
+      }
+      const id = document.getElementById('id').value.trim() || 'video';
+      const blob = new Blob([text], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = id + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function clearForm() {
+      document.getElementById('id').value = '';
+      document.getElementById('title').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('thumbnail').value = '';
+      document.getElementById('video_url').value = '';
+      document.getElementById('tags').value = '';
+      document.getElementById('category').value = '';
+      document.getElementById('views').value = '0';
+      document.getElementById('date').valueAsDate = new Date();
+      document.getElementById('json-output').textContent = '// Form fill করে "Generate JSON" চাপো';
+      document.getElementById('filename').textContent = 'videoX.json';
+    }
+
+    // Auto-generate when typing (optional live preview)
+    ['id','title','description','thumbnail','video_url','tags','category','views','date'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        // Only auto if all required are filled
+        const required = ['id','title','description','thumbnail','video_url','tags','category'];
+        const allFilled = required.every(r => document.getElementById(r).value.trim());
+        if (allFilled) generateJSON();
+      });
+    });
+  </script>
+</body>
+</html>
+
